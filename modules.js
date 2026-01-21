@@ -1,7 +1,21 @@
-const loadash = require('lodash');
+const http = require("http");
 
-const items = [1,[2,[3,[4]]]];
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.end("welcome to our home page");
+  }
 
-const newItems = loadash.flattenDeep(items);
+  if (req.url === "/about") {
+    res.end("this is about section of our page");
+  }
 
-console.log(newItems);
+  res.end(`
+        <h1>oops nothing here</h1>
+        <a href='/'> back home </a>
+        `);
+});
+
+server.listen(3000);
+
+
+

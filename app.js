@@ -1,18 +1,9 @@
-const http = require("http");
+const EventEmitter = require('events');
 
-const server = http.createServer((req, res) => {
-  if (req.url === "/") {
-    res.end("welcome to our home page");
-  }
+const customEmmitter = new EventEmitter();
 
-  if (req.url === "/about") {
-    res.end("this is about section of our page");
-  }
-
-  res.end(`
-        <h1>oops nothing here</h1>
-        <a href='/'> back home </a>
-        `);
+customEmmitter.on('response', ()=>{
+    console.log('data received');
 });
 
-server.listen(3000);
+customEmmitter.emit('response');
