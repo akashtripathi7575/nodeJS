@@ -1,20 +1,18 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 
-app.get('/', (req, res)=>{
-    res.status(200).send('home page');
-})
+//setup static and middleware
+app.use(express.static('./public'));
 
-app.get('/about', (req, res)=>{
-    res.status(200).send("this is about page");
+app.get('/', (req, res)=>{
+    res.sendFile(path.resolve(__dirname, './public/index.html'));
 })
 
 app.use((req, res)=>{
-    res.status(404).send("<h1> page not found</h1>")
-})
+    res.status(404).send('<h1>page not found</h1>');
+});
 
-app.listen(5000,()=>{
-    console.log("server is running");
-})
-
-//app.put, delete, post,get,listen,all,use
+app.listen(5000, ()=>{
+    console.log('server is listening to port 5000...');
+});
