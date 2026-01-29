@@ -1,9 +1,20 @@
-const EventEmitter = require('events');
+const express = require('express');
+const app = express();
 
-const customEmmitter = new EventEmitter();
+app.get('/', (req, res)=>{
+    res.status(200).send('home page');
+})
 
-customEmmitter.on('response', ()=>{
-    console.log('data received');
-});
+app.get('/about', (req, res)=>{
+    res.status(200).send("this is about page");
+})
 
-customEmmitter.emit('response');
+app.use((req, res)=>{
+    res.status(404).send("<h1> page not found</h1>")
+})
+
+app.listen(5000,()=>{
+    console.log("server is running");
+})
+
+//app.put, delete, post,get,listen,all,use
